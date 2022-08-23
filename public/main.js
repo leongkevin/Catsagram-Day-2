@@ -12,6 +12,11 @@ export const createMainContent = () => {
     container.appendChild(h1);
     container.appendChild(img);
 
+    const requestButton = document.createElement("button");
+    requestButton.innerHTML = "REQUEST"
+    container.appendChild(requestButton);
+
+
     fetchImage();
 };
 
