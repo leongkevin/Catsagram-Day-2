@@ -20,7 +20,7 @@ export const createMainContent = () => {
 	buttonContainer.appendChild(requestButton);
 	requestButton.addEventListener('click', (e) => {
 		// fetchImage();
-        window.location.reload()
+		window.location.reload();
 	});
 
 	const upvoteButton = document.createElement('button');
@@ -53,12 +53,25 @@ export const createMainContent = () => {
 	commentDiv.appendChild(submitButton);
 	commentDiv.appendChild(ul);
 
-    submitButton.addEventListener('click', e => {
+	submitButton.addEventListener('click', (e) => {
+		e.preventDefault();
+		const newLi = document.createElement('li');
+		const deleteComment = document.createElement('button');
+
+		deleteComment.innerHTML = 'Delete this comment';
+
+		newLi.innerHTML = `${inputField.value}`;
+		newLi.appendChild(deleteComment);
+
+		ul.appendChild(newLi);
+		inputField.value = '';
+	});
+
+
+    deleteComment.addEventListener('click', e => {
         e.preventDefault();
-        const newLi = document.createElement('li')
-        newLi.innerHTML = `${inputField.value}`
-        ul.appendChild(newLi)
-        inputField.value = ''
+        const ulList = document.querySelectorAll('ul')
+        
     })
 
 
