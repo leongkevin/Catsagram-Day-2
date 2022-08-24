@@ -19,7 +19,8 @@ export const createMainContent = () => {
 	requestButton.innerHTML = 'REQUEST';
 	buttonContainer.appendChild(requestButton);
 	requestButton.addEventListener('click', (e) => {
-		fetchImage();
+		// fetchImage();
+        window.location.reload()
 	});
 
 	const upvoteButton = document.createElement('button');
