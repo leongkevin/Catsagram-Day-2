@@ -1,73 +1,81 @@
 export const createMainContent = () => {
-  // Create h1
-  const h1 = document.createElement("h1");
-  h1.innerText = "Catstagram";
+	// Create h1
+	const h1 = document.createElement('h1');
+	h1.innerText = 'Catstagram';
 
-  // Create img
-  const img = document.createElement("img");
-  img.style.margin = "20px";
-  img.style.maxWidth = "750px";
+	// Create img
+	const img = document.createElement('img');
+	img.style.margin = '20px';
+	img.style.maxWidth = '750px';
 
-  const container = document.querySelector(".container");
-  container.appendChild(h1);
-  container.appendChild(img);
+	const container = document.querySelector('.container');
+	container.appendChild(h1);
+	container.appendChild(img);
 
-  const buttonContainer = document.createElement("div");
-  container.appendChild(buttonContainer);
+	const buttonContainer = document.createElement('div');
+	container.appendChild(buttonContainer);
 
-  const requestButton = document.createElement("button");
-  requestButton.innerHTML = "REQUEST";
-  buttonContainer.appendChild(requestButton);
-  requestButton.addEventListener("click", (e) => {
-    fetchImage();
-  });
+	const requestButton = document.createElement('button');
+	requestButton.innerHTML = 'REQUEST';
+	buttonContainer.appendChild(requestButton);
+	requestButton.addEventListener('click', (e) => {
+		fetchImage();
+	});
 
-  const upvoteButton = document.createElement("button");
-  upvoteButton.innerHTML = "UPVOTE = 0";
-  buttonContainer.appendChild(upvoteButton);
-  let upvoteCount = 0;
-  upvoteButton.addEventListener("click", (e) => {
-    upvoteCount++;
-    upvoteButton.innerHTML = `UPVOTE = ${upvoteCount}`;
-  });
+	const upvoteButton = document.createElement('button');
+	upvoteButton.innerHTML = 'UPVOTE = 0';
+	buttonContainer.appendChild(upvoteButton);
+	let upvoteCount = 0;
+	upvoteButton.addEventListener('click', (e) => {
+		upvoteCount++;
+		upvoteButton.innerHTML = `UPVOTE = ${upvoteCount}`;
+	});
 
-  let downvoteCount = 0;
-  const downvoteButton = document.createElement("button");
-  downvoteButton.innerHTML = "DOWNVOTE = 0";
-  buttonContainer.appendChild(downvoteButton);
-  downvoteButton.addEventListener("click", (e) => {
-    downvoteCount++;
-    downvoteButton.innerHTML = `DOWNVOTE = ${downvoteCount}`;
-  });
+	let downvoteCount = 0;
+	const downvoteButton = document.createElement('button');
+	downvoteButton.innerHTML = 'DOWNVOTE = 0';
+	buttonContainer.appendChild(downvoteButton);
+	downvoteButton.addEventListener('click', (e) => {
+		downvoteCount++;
+		downvoteButton.innerHTML = `DOWNVOTE = ${downvoteCount}`;
+	});
 
-  const commentDiv = document.createElement("div");
-  const inputField = document.createElement("input");
-  const submitButton = document.createElement("button");
-  const ul = document.createElement("ul")
-  submitButton.innerHTML = "SUBMIT";
-  inputField.setAttribute("type", "text");
-  inputField.setAttribute("placeholder", "COMMENTs HERE");
-  container.appendChild(commentDiv);
-  commentDiv.appendChild(inputField);
-  commentDiv.appendChild(submitButton);
-  commentDiv.appendChild(ul)
-  
+	const commentDiv = document.createElement('div');
+	const inputField = document.createElement('input');
+	const submitButton = document.createElement('button');
+	const ul = document.createElement('ul');
+	submitButton.innerHTML = 'SUBMIT';
+	inputField.setAttribute('type', 'text');
+	inputField.setAttribute('placeholder', 'COMMENTs HERE');
+	container.appendChild(commentDiv);
+	commentDiv.appendChild(inputField);
+	commentDiv.appendChild(submitButton);
+	commentDiv.appendChild(ul);
 
-  fetchImage();
+    submitButton.addEventListener('click', e => {
+        e.preventDefault();
+        const newLi = document.createElement('li')
+        newLi.innerHTML = `${inputField.value}`
+        ul.appendChild(newLi)
+        inputField.value = ''
+    })
+
+
+	fetchImage();
 };
 
 const fetchImage = async () => {
-  // Fetch image from API and set img url
-  try {
-    const kittenResponse = await fetch(
-      "https://api.thecatapi.com/v1/images/search?size=small"
-    );
-    // Converts to JSON
-    const kittenData = await kittenResponse.json();
-    // console.log(kittenData);
-    const kittenImg = document.querySelector("img");
-    kittenImg.src = kittenData[0].url;
-  } catch (e) {
-    console.log("Failed to fetch image", e);
-  }
+	// Fetch image from API and set img url
+	try {
+		const kittenResponse = await fetch(
+			'https://api.thecatapi.com/v1/images/search?size=small'
+		);
+		// Converts to JSON
+		const kittenData = await kittenResponse.json();
+		// console.log(kittenData);
+		const kittenImg = document.querySelector('img');
+		kittenImg.src = kittenData[0].url;
+	} catch (e) {
+		console.log('Failed to fetch image', e);
+	}
 };
